@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from '@gluestack-ui/themed'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+const Color = require('color')
 
 import InputContainer from '../components/InputContainer'
 import ColorButton from '../components/ColorButton'
@@ -47,13 +48,26 @@ const Home = ({ navigation }: any) => {
     console.log('Saved Colors in Local Storage')
   }
 
-  const saveColor = (val: string) => {
-    const color = val.toLowerCase()
-    if (colors.includes(color)) {
-      console.log('The color is already in the list')
-    } else {
-      setColors([color, ...colors])
-    }
+  const saveColor = async (val: string) => {
+    setIsLoading(true)
+    const words = val.split(' ')
+    const color = words.join('').toLowerCase()
+
+    await fetch(`https://color.serialif.com/${color}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success') {
+          if (colors.includes(color)) {
+            console.log('The color is already in the list')
+          } else {
+            setColors([color, ...colors])
+          }
+        } else {
+          console.log('No color found with this name')
+        }
+      })
+      .catch(err => console.log(err))
+    setIsLoading(false)
   }
 
   const deleteColor = (val: string) => {

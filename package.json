@@ -14,7 +14,7 @@
     "@gluestack-ui/config": "latest",
     "@gluestack-ui/themed": "latest",
     "@legendapp/motion": "latest",
-    "@react-native-async-storage/async-storage": "^1.19.4",
+    "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "color": "^4.2.3",
