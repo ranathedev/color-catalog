@@ -33,6 +33,7 @@ const InputContainer = ({ handleSubmit }: Props) => {
           ref={ref}
           placeholder="Enter color name..."
           value={value}
+          autoCapitalize="none"
           onChangeText={setValue}
         />
       </Input>
